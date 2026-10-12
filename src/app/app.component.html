@@ -1,0 +1,40 @@
+<h1>📋 לוח בקרה: שגיאות קריטיות במערכת Oracle</h1>
+
+<div class="control-panel">
+  <button class="refresh-btn" (click)="loadErrors()">רענן נתונים מחדש 🔄</button>
+  <span class="status-badge" [ngClass]="statusClass">{{ statusMessage }}</span>
+</div>
+
+<table>
+  <thead>
+    <tr>
+      <th>מזהה שגיאה (ID)</th>
+      <th>רמת חומרה (Level)</th>
+      <th>תוכן הודעת השגיאה (Message)</th>
+      <th>זמן אירוע (Time)</th>
+    </tr>
+  </thead>
+  <tbody>
+    @if (errors.length > 0) {
+      @for (log of errors; track log.id) {
+        <tr>
+          <td class="error-id">{{ log.id }}</td>
+          <td>
+            <!-- צביעה דינמית קלה לפי רמת השגיאה (אופציונלי) -->
+            <span [style.color]="log.level === 'CRITICAL' ? '#b91c1c' : '#334155'" style="font-weight: bold;">
+              {{ log.level }}
+            </span>
+          </td>
+          <td>{{ log.message }}</td>
+          <td>{{ log.time }}</td>
+        </tr>
+      }
+    } @else {
+      <tr>
+        <td colspan="4" class="no-data">
+          {{ isLoaded ? '✅ לא נמצאו שגיאות קריטיות בלוגים!' : 'אין נתונים להצגה כעת. לחץ רענן.' }}
+        </td>
+      </tr>
+    }
+  </tbody>
+</table>
