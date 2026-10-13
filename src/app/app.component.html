@@ -16,17 +16,17 @@
   </thead>
   <tbody>
     @if (errors.length > 0) {
-      @for (log of errors; track log.id) {
+      @for (log of errors; track log.ID) {
         <tr>
-          <td class="error-id">{{ log.id }}</td>
+          <td class="error-id">{{ log.ID }}</td>
           <td>
             <!-- צביעה דינמית קלה לפי רמת השגיאה (אופציונלי) -->
-            <span [style.color]="log.level === 'CRITICAL' ? '#b91c1c' : '#334155'" style="font-weight: bold;">
-              {{ log.level }}
+            <span [style.color]="log.Level === 'CRITICAL' ? '#b91c1c' : '#334155'" style="font-weight: bold;">
+              {{ log.Level }}
             </span>
           </td>
-          <td>{{ log.message }}</td>
-          <td>{{ log.time }}</td>
+          <td>{{ log.Message }}</td>
+          <td>{{ log.Time }}</td>
         </tr>
       }
     } @else {
